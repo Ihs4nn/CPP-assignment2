@@ -33,5 +33,6 @@ class Board:
                 for card in self.flipped_cards:
                     card.match_card()
             else:
-                print("Reset function not created yet")
+                for card in self.flipped_cards:
+                    card.reset_card()
 

@@ -21,3 +21,8 @@ class Card:
     def match_card(self):
         self.is_revealed = True
         self.is_matched = True
+
+    # Function to reset the card
+    def reset_card(self):
+        self.is_revealed = False
+        self.is_matched = False
