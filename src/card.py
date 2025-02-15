@@ -18,3 +18,6 @@ class Card:
         self.is_revealed = True
     
     # Function to mark the card as matched
+    def match_card(self):
+        self.is_revealed = True
+        self.is_matched = True
