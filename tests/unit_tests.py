@@ -1,6 +1,5 @@
 import pytest
 from src.board import Board
-from src.card import Card
 
 # Creating fixtures
 @pytest.fixture
@@ -24,7 +23,7 @@ def sample_board(sample_terms):
 
 
 # UT_01
-class test_UT_01:
+class TestUT01:
     # Step 1
     def test_board_dimensions(self, sample_board):
         assert sample_board.width == 800
@@ -34,5 +33,3 @@ class test_UT_01:
         assert len(sample_board.cards) == 16
     
     # Step 2
-    
-
