@@ -11,8 +11,10 @@ class Card:
         self.height = height
         # Cards should be face down at the start
         self.is_revealed = False
-        self.matched = False
+        self.is_matched = False
 
-# Function to flip the card
+    # Function to flip the card
     def flip_card(self):
         self.is_revealed = True
+    
+    # Function to mark the card as matched

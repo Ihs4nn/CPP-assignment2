@@ -17,10 +17,23 @@ def sample_terms():
 ]
 
 @pytest.fixture
+# Matching terms
+def matching_pair_terms():
+    return [
+        ("ADO", "Azure DevOps - software suite for tracking/deploying")
+    ]
+
+@pytest.fixture
 def sample_board(sample_terms):
     board = Board(800, 600)
-    board.create_grid(terms=sample_terms, cols=4, rows=4)
+    board.create_grid(terms=sample_terms, cols=4, rows=3)
     return board
+
+@pytest.fixture
+def matching_sample_board(matching_pair_terms):
+    matching_board = Board(800, 600)
+    matching_board.create_grid(terms=matching_pair_terms, cold=4, rows=3)
+    return matching_board
 
 # UT_01
 class TestUT01:
@@ -61,7 +74,7 @@ class TestUT01:
 
 # UT_02
 class TestUT02:
-    # Step 1 and 2
+    # Step 1 
     def test_card_flipping(self, sample_board):
         # Get first two cards
         first_card = sample_board.cards[0]
@@ -75,4 +88,21 @@ class TestUT02:
         # Check to see if they are revealed
         assert first_card.is_revealed == True
         assert second_card.is_revealed == True
+    # Step 2
+    def test_card_matching_valid(self, matching_sample_board):
+        # Get first two cards
+        first_card = sample_board.cards[0]
+        second_card = sample_board.cards[1]
+        # Flip the cards
+        first_card.flip_card()
+        second_card.flip_card()
+        # Add them to a list to check for a pair
+        matching_sample_board.flipped_cards = [first_card, second_card]
+        # Check if they match
+        matching_sample_board.check_match()
+        assert first_card.is_revealed is True
+        assert second_card.is_revealed is True
+        assert first_card.is_matched is True
+        assert second_card.is_matched is True
 
+    # resetting
