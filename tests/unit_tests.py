@@ -104,5 +104,22 @@ class TestUT02:
         assert second_card.is_revealed is True
         assert first_card.is_matched is True
         assert second_card.is_matched is True
+    # Step 3
+    def test_card_matching_invalid_reset(self, sample_board):
+        # Get first two cards
+        first_card = sample_board.cards[0]
+        second_card = sample_board.cards[1]
+        # Flip the cards
+        first_card.flip_card()
+        second_card.flip_card()
+        # Add them to a list to check for a pair
+        sample_board.flipped_cards = [first_card, second_card]
+        sample_board.check_match()
+        # Since they dont match check if card resets
+        assert first_card.is_revealed is False
+        assert second_card.is_revealed is False
+        assert first_card.is_matched is False
+        assert second_card.is_matched is False
 
-    # resetting
+
+
