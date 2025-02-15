@@ -12,3 +12,4 @@ class Card:
         # Cards should be face down at the start
         self.is_revealed = False
         self.matched = False
+

@@ -1,5 +1,6 @@
 import pytest
 from src.board import Board
+from src.card import Card
 
 # Creating fixtures
 @pytest.fixture
@@ -58,4 +59,20 @@ class TestUT01:
         assert card_count == 16
         assert term_count == 8
 
+# UT_02
+class TestUT02:
+    # Step 1 and 2
+    def test_card_flipping(self, sample_board):
+        # Get first two cards
+        first_card = sample_board.cards[0]
+        second_card = sample_board.cards[1]
+        # Check to see if they are hidden at first
+        assert first_card.is_revealed == False
+        assert second_card.is_revealed == False
+        # Flip the cards
+        first_card.flip_card()
+        second_card.flip_card()
+        # Check to see if they are revealed
+        assert first_card.is_revealed == True
+        assert second_card.is_revealed == True
 
