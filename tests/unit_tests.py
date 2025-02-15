@@ -32,7 +32,7 @@ def sample_board(sample_terms):
 @pytest.fixture
 def matching_sample_board(matching_pair_terms):
     matching_board = Board(800, 600)
-    matching_board.create_grid(terms=matching_pair_terms, cold=4, rows=3)
+    matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=3)
     return matching_board
 
 # UT_01
@@ -91,8 +91,8 @@ class TestUT02:
     # Step 2
     def test_card_matching_valid(self, matching_sample_board):
         # Get first two cards
-        first_card = sample_board.cards[0]
-        second_card = sample_board.cards[1]
+        first_card = matching_sample_board.cards[0]
+        second_card = matching_sample_board.cards[1]
         # Flip the cards
         first_card.flip_card()
         second_card.flip_card()

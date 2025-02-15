@@ -29,8 +29,9 @@ class Board:
     
     def check_match(self):
         if len(self.flipped_cards) == 2:
-            if self.flipped_cards[0].term == self.flipped_cards[1].term:
-                Card.match_card()
+            if self.flipped_cards[0].value == self.flipped_cards[1].value:
+                for card in self.flipped_cards:
+                    card.match_card()
             else:
                 print("Reset function not created yet")
 
