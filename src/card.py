@@ -9,5 +9,6 @@ class Card:
         self.y = y
         self.width = width
         self.height = height
+        # Cards should be face down at the start
         self.is_revealed = False
         self.matched = False
