@@ -13,3 +13,6 @@ class Card:
         self.is_revealed = False
         self.matched = False
 
+# Function to flip the card
+    def flip_card(self):
+        self.is_revealed = True
