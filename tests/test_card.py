@@ -106,8 +106,3 @@ class TestUT02:
         assert card.is_revealed is True
         assert card.is_matched is True
 
-    
-
-    
-
-# UT_03
