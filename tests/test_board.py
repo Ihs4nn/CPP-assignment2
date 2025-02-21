@@ -28,11 +28,24 @@ def sample_board(sample_terms):
     board.create_grid(terms=sample_terms, cols=4, rows=3)
     return board
 
+# Matching term board
 @pytest.fixture
 def matching_sample_board(matching_pair_terms):
     matching_board = Board(800, 600)
     matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=3)
     return matching_board
+
+# Empty terms
+@pytest.fixture
+def zero_terms():
+    return []
+
+# Empty terms board
+@pytest.fixture
+def zero_terms_board(zero_terms):
+    zero_board = Board(800,600)
+    zero_board.create_grid(terms=zero_terms, cols=4, rows=3)
+    return zero_board
 
 # UT_01
 class TestUT01:
@@ -70,3 +83,7 @@ class TestUT01:
         # There should be 16 cards with 8 terms, therefore the rest of the 8 terms have been doubled
         assert card_count == 16
         assert term_count == 8
+    
+    # Step 4
+    def test_start_game_with_no_cards(self, zero_terms_board):
+        assert len(zero_terms_board.cards) == 0
