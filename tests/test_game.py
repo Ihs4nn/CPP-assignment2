@@ -34,8 +34,6 @@ class TestUT03:
         assert isinstance(sample_game.board, Board)
         assert len(sample_game.board.cards) == 0
         assert len(sample_game.board.flipped_cards) == 0
-
-
     # Step 2
     def test_function_to_start_game():
 
