@@ -8,6 +8,7 @@ class Board:
         self.height = height
         # List to store the flipped cards
         self.flipped_cards = []
+        self.cards = []
 
     # Hardcoding rows and columns to get the UT_01 tests passing
     def create_grid(self, terms, cols=4, rows=3):
