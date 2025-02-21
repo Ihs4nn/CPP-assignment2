@@ -35,6 +35,7 @@ def matching_sample_board(matching_pair_terms):
     matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=3)
     return matching_board
 
+
 # UT_02
 class TestUT02:
     # Step 1 
@@ -85,6 +86,28 @@ class TestUT02:
         assert second_card.is_revealed is False
         assert first_card.is_matched is False
         assert second_card.is_matched is False
+
+    # Step 4
+    def test_flip_or_reset_matched_card(self, sample_board):
+        # Get a card
+        card = sample_board.cards[0]
+        # Mark it as matched
+        card.match_card()
+        # Check if it is matched
+        assert card.is_revealed is True
+        assert card.is_matched is True
+        # Flip the card
+        card.flip_card()
+        # Since it was marked as matched, ensure they remain true
+        assert card.is_revealed is True
+        assert card.is_matched is True
+        # Reset the card
+        card.reset_card()
+        assert card.is_revealed is True
+        assert card.is_matched is True
+
+    
+
     
 
 # UT_03

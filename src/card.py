@@ -15,7 +15,8 @@ class Card:
 
     # Function to flip the card
     def flip_card(self):
-        self.is_revealed = True
+        if not self.is_matched:
+            self.is_revealed = True
     
     # Function to mark the card as matched
     def match_card(self):
@@ -24,5 +25,6 @@ class Card:
 
     # Function to reset the card
     def reset_card(self):
-        self.is_revealed = False
-        self.is_matched = False
+        if not self.is_matched:
+            self.is_revealed = False
+            self.is_matched = False
