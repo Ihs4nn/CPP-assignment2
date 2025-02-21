@@ -1,6 +1,5 @@
 import pytest
 from src.board import Board
-from src.card import Card
 
 # Creating fixtures
 @pytest.fixture
@@ -71,61 +70,3 @@ class TestUT01:
         # There should be 16 cards with 8 terms, therefore the rest of the 8 terms have been doubled
         assert card_count == 16
         assert term_count == 8
-
-# UT_02
-class TestUT02:
-    # Step 1 
-    def test_card_flipping(self, sample_board):
-        # Get first two cards
-        first_card = sample_board.cards[0]
-        second_card = sample_board.cards[1]
-        # Check to see if they are hidden at first
-        assert first_card.is_revealed == False
-        assert second_card.is_revealed == False
-        # Flip the cards
-        first_card.flip_card()
-        second_card.flip_card()
-        # Check to see if they are revealed
-        assert first_card.is_revealed == True
-        assert second_card.is_revealed == True
-
-    # Step 2
-    def test_card_matching_valid(self, matching_sample_board):
-        # Get first two cards
-        first_card = matching_sample_board.cards[0]
-        second_card = matching_sample_board.cards[1]
-        # Flip the cards
-        first_card.flip_card()
-        second_card.flip_card()
-        # Add them to a list to check for a pair
-        matching_sample_board.flipped_cards = [first_card, second_card]
-        # Check if they match
-        matching_sample_board.check_match()
-        assert first_card.is_revealed is True
-        assert second_card.is_revealed is True
-        assert first_card.is_matched is True
-        assert second_card.is_matched is True
-
-    # Step 3
-    def test_card_matching_invalid_reset(self, sample_board):
-        # Get first two cards
-        first_card = sample_board.cards[0]
-        second_card = sample_board.cards[1]
-        # Flip the cards
-        first_card.flip_card()
-        second_card.flip_card()
-        # Add them to a list to check for a pair
-        sample_board.flipped_cards = [first_card, second_card]
-        sample_board.check_match()
-        # Since they dont match check if card resets
-        assert first_card.is_revealed is False
-        assert second_card.is_revealed is False
-        assert first_card.is_matched is False
-        assert second_card.is_matched is False
-    
-
-# UT_03
-
-
-
-

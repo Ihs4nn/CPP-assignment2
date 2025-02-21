@@ -35,43 +35,6 @@ def matching_sample_board(matching_pair_terms):
     matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=3)
     return matching_board
 
-# UT_01
-class TestUT01:
-    # Step 1
-    def test_number_of_cards(self, sample_board):
-        assert sample_board.width == 800
-        assert sample_board.height == 600
-        # Checks if 16 cards have been created
-        assert len(sample_board.cards) == 16
-
-    # Step 2
-    def test_if_card_are_hidden(self, sample_board):
-        for card in sample_board.cards:
-            # Checks the card classes value
-            assert card.is_revealed == False
-
-    # Step 3
-    def test_each_card_should_have_pair(self, sample_board):
-        # Used to count the amount of cards
-        card_count = 0
-        # Used to count the amount of terms
-        term_count = 0
-        # List to store unique acroynms found
-        unique_acro = []
-
-        for card in sample_board.cards:
-            if card.value not in unique_acro:
-                unique_acro.append(card.value)
-                # Adds 1 to the counter aswell as the card counter
-                term_count += 1
-                card_count += 1
-            else:
-                card_count += 1
-
-        # There should be 16 cards with 8 terms, therefore the rest of the 8 terms have been doubled
-        assert card_count == 16
-        assert term_count == 8
-
 # UT_02
 class TestUT02:
     # Step 1 
@@ -125,7 +88,3 @@ class TestUT02:
     
 
 # UT_03
-
-
-
-

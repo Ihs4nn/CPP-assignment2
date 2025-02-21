@@ -6,6 +6,7 @@ class Board:
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
+        # List to store the flipped cards
         self.flipped_cards = []
 
     # Hardcoding rows and columns to get the UT_01 tests passing
@@ -27,12 +28,17 @@ class Board:
             )
             self.cards.append(card)
     
+    # Function to check if two cards match
     def check_match(self):
+        # If two cards have been chosen
         if len(self.flipped_cards) == 2:
+            # And the value is the same
             if self.flipped_cards[0].value == self.flipped_cards[1].value:
+                # toggle the cards attribute to is_matched = true
                 for card in self.flipped_cards:
                     card.match_card()
             else:
+                # if not, reset the cards
                 for card in self.flipped_cards:
                     card.reset_card()
 
