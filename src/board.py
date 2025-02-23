@@ -20,7 +20,7 @@ class Board:
         self.cards = []
         for (acroynm, definition) in card_data:
             card = Card(
-                value = acroynm,
+                term = acroynm,
                 definition = definition,
                 x = 0,
                 y = 0,
@@ -34,12 +34,15 @@ class Board:
         # If two cards have been chosen
         if len(self.flipped_cards) == 2:
             # And the value is the same
-            if self.flipped_cards[0].value == self.flipped_cards[1].value:
+            if self.flipped_cards[0].term == self.flipped_cards[1].term:
                 # toggle the cards attribute to is_matched = true
                 for card in self.flipped_cards:
                     card.match_card()
             else:
                 # if not, reset the cards
                 for card in self.flipped_cards:
+                    pygame.time.wait(1000)
                     card.reset_card()
+            # Clear the list for the next round
+            self.flipped_cards = []
 

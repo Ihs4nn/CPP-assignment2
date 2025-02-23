@@ -72,8 +72,8 @@ class TestUT01:
         unique_acro = []
 
         for card in sample_board.cards:
-            if card.value not in unique_acro:
-                unique_acro.append(card.value)
+            if card.term not in unique_acro:
+                unique_acro.append(card.term)
                 # Adds 1 to the counter aswell as the card counter
                 term_count += 1
                 card_count += 1

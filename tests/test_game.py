@@ -30,7 +30,7 @@ def matching_sample_board(matching_pair_terms):
     return matching_board
 
 @pytest.fixture
-def matching_card_game():
+def matching_card_game(matching_sample_board):
     matching_game = Game(800, 600, matching_sample_board)
     return matching_game
 
@@ -81,11 +81,7 @@ class TestUT04:
         # Calls clicking function
         start_game.handle_card_click(first_card)
         start_game.handle_card_click(second_card)
-        # Appends cards to the list
-        assert len(start_game.board.flipped_cards) == 2
-        # Checks if they match
-        start_game.check_match()
-        # They do not, so will remain as false
+        # They do not match so will remain as false
         assert first_card.is_revealed is False
         assert second_card.is_revealed is False
         assert first_card.is_matched is False
@@ -93,22 +89,20 @@ class TestUT04:
         # Clear list for next round of two clicks
         assert len(start_game.board.flipped_cards) == 0
     # Step 4
-    def test_second_card_is_same(self, matching_game):
+    def test_second_card_is_same(self, matching_card_game):
         # Uses a board with 2 matching cards
-        matching_game.start_new_game()
-        first_card = matching_game.board.cards[0]
-        second_card = matching_game.board.cards[1]
-        matching_game.handle_card_click(first_card)
-        matching_game.handle_card_click(second_card)
-        assert len(matching_game.board.flipped_cards) == 2
-        matching_game.check_match()
+        matching_card_game.start_new_game()
+        first_card = matching_card_game.board.cards[0]
+        second_card = matching_card_game.board.cards[1]
+        matching_card_game.handle_card_click(first_card)
+        matching_card_game.handle_card_click(second_card)
         # Since they match, the toggles are true
         assert first_card.is_revealed is True
         assert second_card.is_revealed is True
         assert first_card.is_matched is True
         assert second_card.is_matched is True
         # Clears the list for next round
-        assert len(matching_game.board.flipped_cards) == 0
+        assert len(matching_card_game.board.flipped_cards) == 0
 
 
 

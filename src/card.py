@@ -2,8 +2,8 @@ import pygame
 from typing import Tuple
 
 class Card:
-    def __init__(self, value, x, y, width, height, definition):
-        self.value = value
+    def __init__(self, term, x, y, width, height, definition):
+        self.term = term
         self.definition = definition
         self.x = x
         self.y = y
