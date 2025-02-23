@@ -5,19 +5,6 @@ from src.game import Game
 
 # Creating fixtures
 @pytest.fixture
-def sample_terms():
-    return [
-    ("ADO", "Azure DevOps - software suite for tracking/deploying"),
-    ("PAC", "Pre-Approved Change - for network switching"),
-    ("EBU", "Enterprise Business Unit - business part of Vodafone"),
-    ("FT",  "Fault Tolerance - system continues operating if errors occur"),
-    ("MVA", "My Vodafone App - the customer app"),
-    ("TLD", "Top Level Domain - e.g., .com, .org, .uk"),
-    ("SSH", "Secure Shell - protocol for secure network communication"),
-    ("CTN", "Customer Telephone Number - the user's phone number"),
-]
-
-@pytest.fixture
 def empty_board():
     return Board(800, 600)
 
@@ -45,9 +32,40 @@ class TestUT03:
         start_game.start_new_game()
         assert len(start_game.board.cards) > 0
         assert len(start_game.board.flipped_cards) == 0
-        # Check if a card is not flipped or matched
+        # Check if a card is not flipped or matched at the start
         card = start_game.board.cards[0]
         assert card.is_revealed == False
         assert card.is_matched == False
-    # # Step 3
-    # def test_board_is_initialised():
+
+# UT_04
+class TestUT04:
+    # Step 1
+    def test_get_card(self, start_game):
+        start_game.start_new_game()
+        card = start_game.board.cards[0]
+        assert card.is_revealed == False
+        assert card.is_matched == False
+    # Step 2
+    def test_handling_click_logic(self, start_game):
+        start_game.start_new_game()
+        card = start_game.board.cards[0]
+        start_game.handle_card_click(card)
+        assert card.is_revealed == True
+        assert len(start_game.board.flipped_cards) == 1
+    # Step 3
+    def test_second_card_different(self, start_game):
+        start_game.start_new_game()
+        first_card = start_game.board.cards[0]
+        second_card = start_game.board.cards[1]
+        start_game.handle_card_click(first_card)
+        second_card.handle_card_click(second_card)
+        assert len(start_game.board.flipped_cards) == 2
+        start_game.check_match()
+        assert first_card.is_revealed is False
+        assert second_card.is_revealed is False
+        assert first_card.is_matched is False
+        assert second_card.is_matched is False
+
+
+
+        
