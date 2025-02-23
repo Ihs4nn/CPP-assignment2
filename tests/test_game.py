@@ -118,6 +118,17 @@ class TestUT05:
         # Check that the game now stores the definition
         assert matching_card_game.current_definition == first_card.definition
 
+# UT_06
+class TestUT06:
+    def test_all_cards_matched(self, start_game):
+        # Step 1
+        start_game.start_new_game()
+        # Manually set all cards to matched
+        for card in start_game.board.cards:
+            card.is_matched = True
+        # Check if 'check_win' returns True
+        assert start_game.check_win() == True
+
 
 
 
