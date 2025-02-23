@@ -34,7 +34,8 @@ class Board:
         # If two cards have been chosen
         if len(self.flipped_cards) == 2:
             # And the value is the same
-            if self.flipped_cards[0].term == self.flipped_cards[1].term:
+            is_match = self.flipped_cards[0].term == self.flipped_cards[1].term
+            if is_match:
                 # toggle the cards attribute to is_matched = true
                 for card in self.flipped_cards:
                     card.match_card()
@@ -45,4 +46,6 @@ class Board:
                     card.reset_card()
             # Clear the list for the next round
             self.flipped_cards = []
+            return is_match
+        return False
 

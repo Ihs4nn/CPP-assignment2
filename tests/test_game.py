@@ -104,14 +104,15 @@ class TestUT04:
         # Clears the list for next round
         assert len(matching_card_game.board.flipped_cards) == 0
 
-
 # UT_05
 class TestUT05:
-    def test_show_definition_when_cards_match(matching_card_game):
+    def test_definition_when_cards_match(self, matching_card_game):
+        # Step 1
         matching_card_game.start_new_game()
         # Flip two matching cards
         first_card = matching_card_game.board.cards[0]
         second_card = matching_card_game.board.cards[1]
+        # Step 2
         matching_card_game.handle_card_click(first_card)
         matching_card_game.handle_card_click(second_card)
         # Check that the game now stores the definition

@@ -15,6 +15,7 @@ class Game:
             ("ROI", "Return on Investment - Profitability measurement"),
             ("CRM", "Customer Relationship Management - Client interaction system")
         ]
+        self.current_definition = ""
 
     # Function to initalise a new game
     def start_new_game(self):
@@ -30,5 +31,9 @@ class Game:
             self.board.flipped_cards.append(card)
             # If the length is 2, check if they match
             if len(self.board.flipped_cards) == 2:
-                self.board.check_match()
+                found_pair = self.board.check_match()
+                if found_pair:
+                    self.current_definition = card.definition
+                else:
+                    self.current_definition = None
 
