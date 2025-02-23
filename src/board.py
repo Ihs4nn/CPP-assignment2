@@ -42,7 +42,7 @@ class Board:
             else:
                 # if not, reset the cards
                 for card in self.flipped_cards:
-                    pygame.time.wait(1000)
+                    # pygame.time.wait(1000)
                     card.reset_card()
             # Clear the list for the next round
             self.flipped_cards = []

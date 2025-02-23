@@ -37,3 +37,6 @@ class Game:
                 else:
                     self.current_definition = None
 
+    # Function to check if all cards are matched for a win
+    def check_win(self):
+        return all(card.is_matched for card in self.board.cards)

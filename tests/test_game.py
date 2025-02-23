@@ -43,6 +43,7 @@ class TestUT03:
         assert isinstance(empty_game.board, Board)
         assert len(empty_game.board.cards) == 0
         assert len(empty_game.board.flipped_cards) == 0
+        
     # # Step 2
     def test_function_to_start_game(self, start_game):
         start_game.start_new_game()
@@ -62,6 +63,7 @@ class TestUT04:
         # Check if the card is initalised properly
         assert card.is_revealed == False
         assert card.is_matched == False
+
     # Step 2
     def test_handling_click_logic(self, start_game):
         start_game.start_new_game()
@@ -72,6 +74,7 @@ class TestUT04:
         assert card.is_revealed == True
         # Appends card to 'flipped_cards' list
         assert len(start_game.board.flipped_cards) == 1
+
     # Step 3
     def test_second_card_different(self, start_game):
         start_game.start_new_game()
@@ -88,6 +91,7 @@ class TestUT04:
         assert second_card.is_matched is False
         # Clear list for next round of two clicks
         assert len(start_game.board.flipped_cards) == 0
+
     # Step 4
     def test_second_card_is_same(self, matching_card_game):
         # Uses a board with 2 matching cards
@@ -120,8 +124,8 @@ class TestUT05:
 
 # UT_06
 class TestUT06:
+    # Step 1
     def test_all_cards_matched(self, start_game):
-        # Step 1
         start_game.start_new_game()
         # Manually set all cards to matched
         for card in start_game.board.cards:
@@ -129,6 +133,20 @@ class TestUT06:
         # Check if 'check_win' returns True
         assert start_game.check_win() == True
 
+    # Step 2
+    def test_flow_of_match(self, matching_card_game):
+        matching_card_game.start_new_game()
+        # Flip first card
+        first_card = matching_card_game.board.cards[0]
+        matching_card_game.handle_card_click(first_card)
+        # Check 'check_win' is false
+        assert matching_card_game.check_win() == False
+        # Step 3
+        # Flip second card
+        second_card = matching_card_game.board.cards[1]
+        matching_card_game.handle_card_click(second_card)
+        # Check 'check_win' is true
+        assert matching_card_game.check_win() == True
 
 
 
