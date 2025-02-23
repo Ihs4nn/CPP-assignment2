@@ -1,6 +1,5 @@
 import pytest
 from src.board import Board
-from src.card import Card
 
 # Creating fixtures
 @pytest.fixture
