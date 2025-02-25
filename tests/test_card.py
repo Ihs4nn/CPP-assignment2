@@ -31,7 +31,7 @@ def sample_board(sample_terms):
 @pytest.fixture
 def matching_sample_board(matching_pair_terms):
     matching_board = Board(800, 600)
-    matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=3)
+    matching_board.create_grid(terms=matching_pair_terms, cols=4, rows=4)
     return matching_board
 
 

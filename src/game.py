@@ -13,7 +13,17 @@ class Game:
             ("CEO", "Chief Executive Officer - Highest-ranking executive"),
             ("KPI", "Key Performance Indicator - Success metrics measurement"),
             ("ROI", "Return on Investment - Profitability measurement"),
-            ("CRM", "Customer Relationship Management - Client interaction system")
+            ("CRM", "Customer Relationship Management - Client interaction system"),
+            ("SEO", "Search Engine Optimization - Improving website visibility"),
+            ("CMS", "Content Management System - Website content handling"),
+            ("API", "Application Programming Interface - Software communication"),
+            ("UX", "User Experience - User interaction with product"),
+            ("UI", "User Interface - Visual elements of software"),
+            ("CSS", "Cascading Style Sheets - Web page styling"),
+            ("HTML", "HyperText Markup Language - Web page structure"),
+            ("JS", "JavaScript - Web scripting language"),
+            ("SQL", "Structured Query Language - Database management"),
+            ("MVP", "Minimum Viable Product - Basic functional product"),
         ]
         self.current_definition = ""
 

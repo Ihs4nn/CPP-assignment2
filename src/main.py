@@ -12,12 +12,29 @@ class GameScreen:
         # Title of the game
         self.title = "Flip 'n' Find"
         pygame.display.set_caption(self.title)
-        # Start and Exit buttons
+        # Current game state
+        self.game_state = "MENU"
+        # Colour constans for screens
+        self.PASTEL_PURPLE = (177, 156, 217)
+        self.PURPLE = (128, 0, 128)
+        self.PASTEL_GREEN = (119, 221, 119)
+        self.PASTEL_RED = (255, 105, 97)
+        self.WHITE = (255, 255, 255)
+        self.BLACK = (0, 0, 0)
+        self.PURPLE = (128, 0, 128)
+        # Font constants for screens
+        self.large_font = pygame.font.SysFont("Arial", 72)
+        self.medium_font = pygame.font.SysFont("Arial", 36)
+        # Menu buttons
         self.start_button = pygame.Rect(300, 200, 200, 50)
         self.exit_button = pygame.Rect(300, 300, 200, 50)
+        # Win screen button
+        self.continue_button = pygame.Rect(250, 350, 200, 50)
+        # Current level
+        self.current_level = 1
+        # Initialising game
         self.board = Board(self.width, self.height)
         self.game = Game(self.width, self.height, self.board)
-        self.game_state = "MENU"
 
     def handle_click(self):
         # Gets the events
