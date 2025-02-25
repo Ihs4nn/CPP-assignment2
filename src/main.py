@@ -36,6 +36,30 @@ class GameScreen:
         self.board = Board(self.width, self.height)
         self.game = Game(self.width, self.height, self.board)
 
+    def draw_menu(self):
+        # Fill background with pastel purple
+        self.screen.fill(self.PASTEL_PURPLE)
+        # Draw Title
+        title_text = self.large_font.render("Flip 'n' Find", True, self.WHITE)
+        title_rect = title_text.get_rect(center=(self.width // 2, self.height // 3))
+        self.screen.blit(title_text, title_rect)
+        # Draw the Start button
+        pygame.draw.rect(self.screen, self.PASTEL_GREEN, self.start_button)
+        start_text = self.medium_font.render("Start", True, self.BLACK)
+        start_text_rect = start_text.get_rect(center=self.start_button.center)
+        self.screen.blit(start_text, start_text_rect)
+        # Draw the Exit button
+        pygame.draw.rect(self.screen, self.PASTEL_RED, self.exit_button)
+        exit_text = self.medium_font.render("Exit", True, self.BLACK)
+        exit_text_rect = exit_text.get_rect(center=self.exit_button.center)
+        self.screen.blit(exit_text, exit_text_rect)
+    
+    def draw_game(self):
+        self.screen.fill(self.WHITE)
+        game_text = self.medium_font.render("Hi, this is a temp page!", True, self.BLACK)
+        self.screen.blit(game_text, game_text.get_rect(center=(self.width // 2, self.height // 2)))
+    
+
     def handle_click(self):
         # Gets the events
         for event in pygame.event.get():
@@ -50,5 +74,24 @@ class GameScreen:
                 elif self.exit_button.collidepoint(event.pos):
                     pygame.quit()
                     sys.exit()
+    
+    def run(self):
+        clock = pygame.time.Clock()
+        running = True
+
+        while running:
+            self.handle_click()
+            if self.game_state == "MENU":
+                self.draw_menu()
+            elif self.game_state == "PLAY":
+                self.draw_game()
+            pygame.display.flip()
+            clock.tick(60)
+        pygame.quit()
+        sys.exit()
+
+if __name__ == "__main__":
+    game_screen = GameScreen(1000, 1000)
+    game_screen.run()
 
 
