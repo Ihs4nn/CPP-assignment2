@@ -26,10 +26,12 @@ class GameScreen:
         self.large_font = pygame.font.SysFont("Arial", 72)
         self.medium_font = pygame.font.SysFont("Arial", 36)
         # Menu buttons
-        self.start_button = pygame.Rect(300, 200, 200, 50)
-        self.exit_button = pygame.Rect(300, 300, 200, 50)
+        button_width = 200
+        button_height = 50
+        self.start_button = pygame.Rect((self.width - button_width) // 2, self.height // 2, button_width, button_height)
+        self.exit_button = pygame.Rect((self.width - button_width) // 2, (self.height // 2) + 100, button_width, button_height)
         # Win screen button
-        self.continue_button = pygame.Rect(250, 350, 200, 50)
+        self.continue_button = pygame.Rect((self.width - button_width) // 2, self.height // 2, button_width, button_height)
         # Current level
         self.current_level = 1
         # Initialising game
