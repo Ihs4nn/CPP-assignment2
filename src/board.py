@@ -10,23 +10,36 @@ class Board:
         self.flipped_cards = []
         self.cards = []
 
-    # Hardcoding rows and columns to get the UT_01 tests passing
-    def create_grid(self, terms, cols=4, rows=3):
-        # Duplicating terms to create a pair
+    # AI Helped
+    def create_grid(self, terms, cols=4, rows=4):
         card_data = terms * 2 
         random.shuffle(card_data)
 
-        # Create a list of the cards
+        card_width = 120
+        card_height = 160
+        spacing = 20
+
+        total_width = cols * card_width + (cols - 1) * spacing
+        total_height = rows * card_height + (rows - 1) * spacing
+        start_x = (self.width - total_width) // 2
+        start_y = (self.height - total_height) // 2
+
+        # Create a list of cards
         self.cards = []
-        for (acroynm, definition) in card_data:
+        for i, (acronym, definition) in enumerate(card_data):
+            col = i % cols
+            row = i // cols
+            x = start_x + col * (card_width + spacing)
+            # End of AI help
+            y = start_y + row * (card_height + spacing)
             card = Card(
-                term = acroynm,
+                term = acronym, 
                 definition = definition,
-                x = 0,
-                y = 0,
-                width = 120,
-                height = 160,
-            )
+                x = x,
+                y = y, 
+                width = card_width, 
+                height = card_height
+                )
             self.cards.append(card)
     
     # Function to check if two cards match
@@ -42,7 +55,6 @@ class Board:
             else:
                 # if not, reset the cards
                 for card in self.flipped_cards:
-                    pygame.time.wait(1000)
                     card.reset_card()
             # Clear the list for the next round
             self.flipped_cards = []
