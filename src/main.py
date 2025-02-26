@@ -25,13 +25,11 @@ class GameScreen:
         # Font constants for screens
         self.large_font = pygame.font.SysFont("Arial", 72)
         self.medium_font = pygame.font.SysFont("Arial", 36)
-        # Menu buttons
+        # Buttons
         button_width = 200
         button_height = 50
         self.start_button = pygame.Rect((self.width - button_width) // 2, self.height // 2, button_width, button_height)
         self.exit_button = pygame.Rect((self.width - button_width) // 2, (self.height // 2) + 100, button_width, button_height)
-        # Win screen button
-        self.continue_button = pygame.Rect((self.width - button_width) // 2, self.height // 2, button_width, button_height)
         # Initialising game
         self.board = Board(self.width, self.height)
         self.game = Game(self.width, self.height, self.board)
@@ -68,7 +66,6 @@ class GameScreen:
             pygame.draw.rect(self.screen, self.BLACK, border_rect)
             # Draw card background
             card_rect = pygame.Rect(card.x, card.y, card.width, card.height)
-            
             if card.is_revealed or card.is_matched:
                 # Card is face up - pastel purple background
                 pygame.draw.rect(self.screen, self.PASTEL_PURPLE, card_rect)
@@ -89,26 +86,27 @@ class GameScreen:
         if self.game.current_definition:
             definition_font = pygame.font.SysFont("Arial", 24)
             definition_text = definition_font.render(self.game.current_definition, True, self.BLACK)
-            
             # Create a text box with fixed height
-            def_box_width = min(800, self.width - 40)  # Max width or screen width minus margins
-            box_height = 60  # Fixed height for the definition box
-            
+            def_box_width = min(800, self.width - 40)
+            box_height = 60 
             # Create and draw text box
-            def_box = pygame.Rect((self.width - def_box_width) // 2, self.height - box_height - 20, 
-                                def_box_width, box_height)
+            def_box = pygame.Rect((self.width - def_box_width) // 2, self.height - box_height - 20, def_box_width, box_height)
             pygame.draw.rect(self.screen, self.PASTEL_PURPLE, def_box)
-            pygame.draw.rect(self.screen, self.BLACK, def_box, 2)  # Border
-            
+            pygame.draw.rect(self.screen, self.BLACK, def_box, 2)
             # Center the text in the box
             def_text_rect = definition_text.get_rect(center=(def_box.x + def_box_width // 2, def_box.y + box_height // 2))
             self.screen.blit(definition_text, def_text_rect)
         # End of AI help
 
-    def win_game(self):
+    def draw_win(self):
         self.screen.fill(self.PASTEL_GREEN)
-        game_text = self.medium_font.render("Hi, Youve won yay!!!", True, self.WHITE)
+        game_text = self.large_font.render("Congratulations, you win!", True, self.WHITE)
         self.screen.blit(game_text, game_text.get_rect(center=(self.width // 2, self.height // 2)))
+        # Draw the Exit button
+        pygame.draw.rect(self.screen, self.PASTEL_RED, self.exit_button)
+        exit_text = self.medium_font.render("Exit", True, self.BLACK)
+        exit_text_rect = exit_text.get_rect(center=self.exit_button.center)
+        self.screen.blit(exit_text, exit_text_rect)
 
     def handle_click(self):
         for event in pygame.event.get():
@@ -136,20 +134,30 @@ class GameScreen:
                         if card_rect.collidepoint(mouse_pos) and not card.is_revealed and not card.is_matched:
                             self.game.handle_card_click(card)
                         # End of AI help
-                            # Check if the game is won after each card click
-                            if self.game.check_win():
-                                self.game_state = "WIN"
+                # Check if the game has been completed
+                elif self.game_state == "WIN":
+                    if self.exit_button.collidepoint(mouse_pos):
+                        pygame.quit()
+                        sys.exit()
     
     def run(self):
         clock = pygame.time.Clock()
         running = True
-
         while running:
             self.handle_click()
+            # If the state is 'menu' draw the menu screen
             if self.game_state == "MENU":
                 self.draw_menu()
+            # If its 'play', draw the game screen
             elif self.game_state == "PLAY":
+                get_state = self.game.update_flip()
+                # Check for a win each time
+                if get_state == "WIN":
+                    self.game_state = "WIN"
                 self.draw_game()
+            # If its 'win', draw the win screen
+            elif self.game_state == "WIN":
+                self.draw_win()
             pygame.display.flip()
             clock.tick(60)
         pygame.quit()
