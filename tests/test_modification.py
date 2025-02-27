@@ -9,7 +9,7 @@ def matching_pair_terms():
     ]
 
 @pytest.fixture
-def matching_game(matching_pair_terms):
+def matching_game_screen(matching_pair_terms):
     gs = GameScreen(800, 600)
     gs.game.terms = matching_pair_terms
     gs.game.board.create_grid(terms=matching_pair_terms, cols=1, rows=2)
@@ -20,7 +20,7 @@ def matching_game(matching_pair_terms):
 # RT_01
 class TestRT01:
     # Step 1
-    def test_flip_single_card(matching_game_screen):
+    def test_flip_single_card(self, matching_game_screen):
         # Get a card from the board
         card = matching_game_screen.game.board.cards[0]
         # Check its inital state is hidden
@@ -30,10 +30,10 @@ class TestRT01:
         # Check it now becomes revealed
         assert card.is_revealed == True
     # Step 2
-    def test_matching_cards(matching_game_screen):
+    def test_matching_cards(self, matching_game_screen):
         board = matching_game_screen.game.board
         # Gets the first and second card from the board
-        first_card = board.cards[0], 
+        first_card = board.cards[0]
         second_card = board.cards[1]
         # Imitates user clicking
         matching_game_screen.game.handle_card_click(first_card)
@@ -50,9 +50,9 @@ class TestRT01:
         # Check that the list clears after a handle_click
         assert len(board.flipped_cards) == 0
     # Step 3
-    def test_flip_matched_card(matching_game_screen):
+    def test_flip_matched_card(self, matching_game_screen):
         board = matching_game_screen.game.board
-        first_card = board.cards[0], 
+        first_card = board.cards[0]
         second_card = board.cards[1]
         matching_game_screen.game.handle_card_click(first_card)
         matching_game_screen.game.handle_card_click(second_card)
