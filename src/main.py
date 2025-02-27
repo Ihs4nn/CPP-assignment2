@@ -81,7 +81,6 @@ class GameScreen:
                 question_text = question_font.render("?", True, self.WHITE)
                 question_rect = question_text.get_rect(center=(card.x + card.width // 2, card.y + card.height // 2))
                 self.screen.blit(question_text, question_rect)
-        
         # Display definition at bottom of screen if there's a match
         if self.game.current_definition:
             definition_font = pygame.font.SysFont("Arial", 24)
